@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 const testErrorRouter = Router();
 
-testErrorRouter.get('/test-error', () => {
+testErrorRouter.get('/', () => {
   throw new Error('Simulated server error');
 });
 
