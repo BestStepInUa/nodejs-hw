@@ -9,14 +9,14 @@ import helmet from 'helmet';
 
 import 'dotenv/config';
 
-import logger from './middleware/logger.js';
+import { logger } from './middleware/logger.js';
 
 import notesRouter from './routes/notesRoutes.js';
 
-import notFoundHandler from './middleware/notFoundHandler.js';
-import errorHanlder from './middleware/errorHandler.js';
+import { notFoundHandler } from './middleware/notFoundHandler.js';
+import { errorHandler } from './middleware/errorHandler.js';
 
-import connectMongoDB from './db/connectMongoDB.js';
+import { connectMongoDB } from './db/connectMongoDB.js';
 
 const app = express();
 
@@ -25,15 +25,15 @@ app.use(helmet());
 app.use(logger);
 app.use(express.json());
 
-app.use('/notes', notesRouter);
+app.use('/', notesRouter);
 
 app.use(notFoundHandler);
-app.use(errorHanlder);
+app.use(errorHandler);
 
 await connectMongoDB();
 
 const port = Number(process.env.PORT) || 3000;
 
 app.listen(port, () =>
-  console.log(`🎉 Server running successfully ${port} port`),
+  console.log(`🎉 Server running successfully on ${port} port`),
 );
