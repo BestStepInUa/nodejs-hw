@@ -16,7 +16,7 @@ import notesRouter from './routes/notesRouter.js';
 import notFoundHandler from './middlewares/notFoundHandler.js';
 import errorHanlder from './middlewares/errorHandler.js';
 
-import connectDatabase from './db/connectMongoDB.js';
+import connectMongoDB from './db/connectMongoDB.js';
 
 const app = express();
 
@@ -30,7 +30,7 @@ app.use('/notes', notesRouter);
 app.use(notFoundHandler);
 app.use(errorHanlder);
 
-await connectDatabase();
+await connectMongoDB();
 
 const port = Number(process.env.PORT) || 3000;
 
