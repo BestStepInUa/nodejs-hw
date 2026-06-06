@@ -16,7 +16,7 @@ import notesRouter from './routes/notesRouter.js';
 import notFoundHandler from './middlewares/notFoundHandler.js';
 import errorHanlder from './middlewares/errorHandler.js';
 
-import connectDatabase from './db/connectDatabase.js';
+import connectDatabase from './db/connectMongoDB.js';
 
 const app = express();
 
