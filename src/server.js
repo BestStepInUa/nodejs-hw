@@ -1,3 +1,8 @@
+import dns from 'dns';
+// Примусово використовуємо публічні DNS для вирішення SRV записів Atlas
+// Це фікс для помилки querySrv ECONNREFUSED на Windows [citation:7]
+dns.setServers(['1.1.1.1', '8.8.8.8']);
+
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -12,6 +17,8 @@ import testErrorRouter from './routes/testErrorRouter.js';
 import notFoundHandler from './middlewares/notFoundHandler.js';
 import errorHanlder from './middlewares/errorHandler.js';
 
+import connectDatabase from './db/connectDatabase.js';
+
 const app = express();
 
 app.use(cors());
@@ -20,11 +27,14 @@ app.use(logger);
 app.use(express.json());
 
 app.use('/notes', notesRouter);
-app.use('/test-error', testErrorRouter);
 
 app.use(notFoundHandler);
 app.use(errorHanlder);
 
+await connectDatabase();
+
 const port = Number(process.env.PORT) || 3000;
 
-app.listen(port, () => console.log(`Server running successfully ${port} port`));
+app.listen(port, () =>
+  console.log(`🎉 Server running successfully ${port} port`),
+);
