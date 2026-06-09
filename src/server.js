@@ -6,12 +6,13 @@ dns.setServers(['1.1.1.1', '8.8.8.8']);
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
+import { errors } from 'celebrate';
 
 import 'dotenv/config';
 
 import { logger } from './middleware/logger.js';
 
-import notesRouter from './routes/notesRoutes.js';
+import notesRouter from './routes/notesRouter.js';
 
 import { notFoundHandler } from './middleware/notFoundHandler.js';
 import { errorHandler } from './middleware/errorHandler.js';
@@ -28,6 +29,7 @@ app.use(express.json());
 app.use('/', notesRouter);
 
 app.use(notFoundHandler);
+app.use(errors());
 app.use(errorHandler);
 
 await connectMongoDB();
