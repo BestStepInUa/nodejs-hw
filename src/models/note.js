@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
 
 import { TAGS } from '../constants/tags.js';
-import { handleMongooseError } from './hooks.js';
+import { handleMongooseError, setUpdateOptions } from './hooks.js';
 
 const noteSchema = new Schema(
   {
@@ -26,6 +26,8 @@ const noteSchema = new Schema(
 );
 
 noteSchema.post('save', handleMongooseError);
+noteSchema.pre('findOneAndUpdate', setUpdateOptions);
+noteSchema.post('findOneAndUpdate', handleMongooseError);
 
 const Note = model('note', noteSchema);
 
