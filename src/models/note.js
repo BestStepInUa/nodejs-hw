@@ -1,5 +1,7 @@
 import { Schema, model } from 'mongoose';
+
 import { TAGS } from '../constants/tags.js';
+import { handleMongooseError } from './hooks.js';
 
 const noteSchema = new Schema(
   {
@@ -22,6 +24,8 @@ const noteSchema = new Schema(
   },
   { versionKey: false, timestamps: true },
 );
+
+noteSchema.post('save', handleMongooseError);
 
 const Note = model('note', noteSchema);
 
