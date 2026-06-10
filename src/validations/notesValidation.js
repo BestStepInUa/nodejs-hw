@@ -66,6 +66,12 @@ export const createNoteSchema = {
 };
 
 export const updateNoteSchema = {
+  [Segments.PARAMS]: Joi.object({
+    noteId: Joi.string().custom(objectIdValidator).required().messages({
+      'string.custom': 'Note ID is invalid',
+      'string.required': 'Note ID is required',
+    }),
+  }),
   [Segments.BODY]: Joi.object({
     title: Joi.string().min(1).messages({
       'string.min': 'Title must be at least 1 character long',
