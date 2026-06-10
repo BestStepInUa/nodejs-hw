@@ -29,7 +29,7 @@ export const getAllNotesSchema = {
       .messages({
         'string.valid': 'Invalid tag',
       }),
-    search: Joi.string().messages({
+    search: Joi.string().allow('').messages({
       'string.allow': 'Search must be a string',
     }),
   }),
@@ -42,7 +42,6 @@ export const objectIdValidator = (value, helpers) => {
 export const noteIdSchema = {
   [Segments.PARAMS]: Joi.object({
     noteId: Joi.string().custom(objectIdValidator).required().messages({
-      'string.custom': 'Note ID is invalid',
       'string.required': 'Note ID is required',
     }),
   }),
@@ -68,7 +67,6 @@ export const createNoteSchema = {
 export const updateNoteSchema = {
   [Segments.PARAMS]: Joi.object({
     noteId: Joi.string().custom(objectIdValidator).required().messages({
-      'string.custom': 'Note ID is invalid',
       'string.required': 'Note ID is required',
     }),
   }),

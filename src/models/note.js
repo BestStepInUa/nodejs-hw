@@ -32,4 +32,4 @@ noteSchema.post('findOneAndUpdate', handleMongooseError);
 
 export const noteSortFields = Object.keys(noteSchema.paths);
 
-export const Note = model('note', noteSchema, 'notes');
+export const Note = model('Note', noteSchema, 'notes');
