@@ -7,7 +7,7 @@ const noteSchema = new Schema(
   {
     title: {
       type: String,
-      minLegth: 1,
+      minlength: 1,
       required: true,
       trim: true,
     },
@@ -33,6 +33,4 @@ noteSchema.post('findOneAndUpdate', handleMongooseError);
 
 export const noteSortFields = Object.keys(noteSchema.paths);
 
-const Note = model('note', noteSchema);
-
-export default Note;
+export const Note = model('note', noteSchema);

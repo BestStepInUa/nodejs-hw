@@ -26,7 +26,6 @@ export const getAllNotesSchema = {
     }),
     tag: Joi.string()
       .valid(...TAGS)
-      .default('Todo')
       .messages({
         'string.valid': 'Invalid tag',
       }),
