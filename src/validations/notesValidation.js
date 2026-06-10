@@ -2,6 +2,7 @@ import { Joi, Segments } from 'celebrate';
 import { isValidObjectId } from 'mongoose';
 
 import { TAGS } from '../constants/tags.js';
+import { noteSortFields } from '../models/note.js';
 
 export const getAllNotesSchema = {
   [Segments.QUERY]: Joi.object({
@@ -14,12 +15,22 @@ export const getAllNotesSchema = {
       'number.min': 'Per page must be at least 5',
       'number.max': 'Per page must be at most 20',
     }),
+    sortBy: Joi.string()
+      .valid(...noteSortFields)
+      .default('_id')
+      .messages({
+        'string.valid': `Sort by must be one of the allowed fields: ${noteSortFields.join(', ')}`,
+      }),
+    sortOrder: Joi.string().valid('asc', 'desc').default('asc').messages({
+      'string.valid': 'Sort order must be either asc or desc',
+    }),
     tag: Joi.string()
       .valid(...TAGS)
+      .default('Todo')
       .messages({
         'string.valid': 'Invalid tag',
       }),
-    search: Joi.string().allow('').messages({
+    search: Joi.string().messages({
       'string.allow': 'Search must be a string',
     }),
   }),

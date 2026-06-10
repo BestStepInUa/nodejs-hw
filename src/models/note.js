@@ -25,9 +25,13 @@ const noteSchema = new Schema(
   { versionKey: false, timestamps: true },
 );
 
+noteSchema.index({ tag: 1 });
+
 noteSchema.post('save', handleMongooseError);
 noteSchema.pre('findOneAndUpdate', setUpdateOptions);
 noteSchema.post('findOneAndUpdate', handleMongooseError);
+
+export const noteSortFields = Object.keys(noteSchema.paths);
 
 const Note = model('note', noteSchema);
 
