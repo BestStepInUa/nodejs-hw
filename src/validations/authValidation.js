@@ -1,7 +1,7 @@
 import { Joi, Segments } from 'celebrate';
 
 export const registerUserSchema = {
-  [Segments.BODY]: Joi.object()({
+  [Segments.BODY]: Joi.object({
     username: Joi.string().min(3).trim().messages({
       'string.min': 'Username must be at least 3 characters long',
       'string.trim': 'Username cannot contain leading or trailing whitespace',
@@ -19,7 +19,7 @@ export const registerUserSchema = {
 };
 
 export const loginUserSchema = {
-  [Segments.BODY]: Joi.object()({
+  [Segments.BODY]: Joi.object({
     email: Joi.string().email().trim().required().messages({
       'string.email': 'Please provide a valid email address',
       'any.required': 'Email is required',
