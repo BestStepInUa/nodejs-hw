@@ -5,6 +5,7 @@ dns.setServers(['1.1.1.1', '8.8.8.8']);
 
 import express from 'express';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import { errors } from 'celebrate';
 
@@ -23,6 +24,7 @@ import { connectMongoDB } from './db/connectMongoDB.js';
 const app = express();
 
 app.use(cors());
+app.use(cookieParser());
 app.use(helmet());
 app.use(logger);
 app.use(express.json());

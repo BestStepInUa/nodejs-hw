@@ -6,7 +6,11 @@ import {
   loginUserSchema,
 } from '../validations/authValidation.js';
 
-import { registerUser, loginUser } from '../controllers/authController.js';
+import {
+  registerUser,
+  loginUser,
+  refreshUserSession,
+} from '../controllers/authController.js';
 
 const authRouter = Router();
 
@@ -23,3 +27,7 @@ authRouter.post(
   celebrate(loginUserSchema, { abortEarly: false }),
   loginUser,
 );
+
+authRouter.post('/refresh', refreshUserSession);
+
+authRouter.post('/logout', logoutUser);
