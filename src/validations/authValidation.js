@@ -5,9 +5,28 @@ import { emailRegexp } from '../constants/auth.js';
 
 export const registerUserSchema = {
   [Segments.BODY]: Joi.object()({
-    email: Joi.string().regex(emailRegexp).required().messages({
+    username: Joi.string().min(3).trim().messages({
+      'string.min': 'Username must be at least 3 characters long',
+      'string.trim': 'Username cannot contain leading or trailing whitespace',
+    }),
+    email: Joi.string().regex(emailRegexp).trim().required().messages({
       'string.pattern.base': 'Please provide a valid email address',
       'any.required': 'Email is required',
+      'string.trim': 'Email cannot contain leading or trailing whitespace',
+    }),
+    password: Joi.string().min(8).required().messages({
+      'string.min': 'Password must be at least 8 characters long',
+      'any.required': 'Password is required',
+    }),
+  }),
+};
+
+export const loginUserSchema = {
+  [Segments.BODY]: Joi.object()({
+    email: Joi.string().regex(emailRegexp).trim().required().messages({
+      'string.pattern.base': 'Please provide a valid email address',
+      'any.required': 'Email is required',
+      'string.trim': 'Email cannot contain leading or trailing whitespace',
     }),
     password: Joi.string().min(8).required().messages({
       'string.min': 'Password must be at least 8 characters long',
