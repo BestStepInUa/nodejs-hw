@@ -18,17 +18,17 @@ const authRouter = Router();
 export default authRouter;
 
 authRouter.post(
-  '/register',
+  '/auth/register',
   celebrate(registerUserSchema, { abortEarly: false }),
   registerUser,
 );
 
 authRouter.post(
-  '/login',
+  '/auth/login',
   celebrate(loginUserSchema, { abortEarly: false }),
   loginUser,
 );
 
-authRouter.post('/refresh', refreshUserSession);
+authRouter.post('/auth/refresh', refreshUserSession);
 
-authRouter.post('/logout', logoutUser);
+authRouter.post('/auth/logout', logoutUser);

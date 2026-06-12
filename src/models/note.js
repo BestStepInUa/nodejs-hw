@@ -22,14 +22,14 @@ const noteSchema = new Schema(
     },
     userId: {
       type: Schema.Types.ObjectId,
-      ref: 'user',
+      ref: 'User',
       required: true,
     },
   },
   { versionKey: false, timestamps: true },
 );
 
-noteSchema.index({ tag: 1 });
+noteSchema.index({ tag: 1, userId: 1 });
 
 noteSchema.post('save', handleMongooseError);
 noteSchema.pre('findOneAndUpdate', setUpdateOptions);

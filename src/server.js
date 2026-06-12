@@ -29,8 +29,8 @@ app.use(helmet());
 app.use(logger);
 app.use(express.json());
 
-app.use('/auth', authRouter);
-app.use('/', notesRouter);
+app.use(authRouter);
+app.use(notesRouter);
 
 app.use(notFoundHandler);
 app.use(errors());
