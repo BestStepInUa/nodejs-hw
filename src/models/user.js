@@ -24,8 +24,6 @@ const userSchema = new Schema(
   { versionKey: false, timestamps: true },
 );
 
-userSchema.index({ email: 1 });
-
 userSchema.pre('save', function () {
   if (!this.username) {
     this.username = this.email;
