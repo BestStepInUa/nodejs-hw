@@ -12,6 +12,7 @@ import 'dotenv/config';
 
 import { logger } from './middleware/logger.js';
 
+import authRouter from './routes/authRoutes.js';
 import notesRouter from './routes/notesRouter.js';
 
 import { notFoundHandler } from './middleware/notFoundHandler.js';
@@ -26,6 +27,7 @@ app.use(helmet());
 app.use(logger);
 app.use(express.json());
 
+app.use('/auth', authRouter);
 app.use('/', notesRouter);
 
 app.use(notFoundHandler);
