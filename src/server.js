@@ -14,7 +14,7 @@ import 'dotenv/config';
 import { logger } from './middleware/logger.js';
 
 import authRouter from './routes/authRoutes.js';
-import notesRouter from './routes/notesRouter.js';
+import notesRouter from './routes/notesRoutes.js';
 
 import { notFoundHandler } from './middleware/notFoundHandler.js';
 import { errorHandler } from './middleware/errorHandler.js';
