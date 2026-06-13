@@ -20,7 +20,7 @@ import {
 
 const notesRouter = Router();
 
-notesRouter.use(authenticate);
+notesRouter.use('/notes', authenticate);
 
 notesRouter.get('/notes', celebrate(getAllNotesSchema), getAllNotes);
 notesRouter.get('/notes/:noteId', celebrate(noteIdSchema), getNoteById);
