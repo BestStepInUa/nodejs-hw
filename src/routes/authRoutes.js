@@ -15,8 +15,6 @@ import {
 
 const authRouter = Router();
 
-export default authRouter;
-
 authRouter.post(
   '/auth/register',
   celebrate(registerUserSchema, { abortEarly: false }),
@@ -32,3 +30,5 @@ authRouter.post(
 authRouter.post('/auth/refresh', refreshUserSession);
 
 authRouter.post('/auth/logout', logoutUser);
+
+export default authRouter;
