@@ -4,6 +4,7 @@ import { celebrate } from 'celebrate';
 import {
   registerUserSchema,
   loginUserSchema,
+  requestResetEmailSchema,
 } from '../validations/authValidation.js';
 
 import {
@@ -11,6 +12,7 @@ import {
   loginUser,
   refreshUserSession,
   logoutUser,
+  requestResetEmail,
 } from '../controllers/authController.js';
 
 const authRouter = Router();
@@ -30,5 +32,11 @@ authRouter.post(
 authRouter.post('/auth/refresh', refreshUserSession);
 
 authRouter.post('/auth/logout', logoutUser);
+
+authRouter.post(
+  '/auth/request-reset-email',
+  celebrate(requestResetEmailSchema, { abortEarly: false }),
+  requestResetEmail,
+);
 
 export default authRouter;

@@ -31,3 +31,13 @@ export const loginUserSchema = {
     }),
   }),
 };
+
+export const requestResetEmailSchema = {
+  [Segments.BODY]: Joi.object({
+    email: Joi.string().email().trim().required().messages({
+      'string.email': 'Please provide a valid email address',
+      'any.required': 'Email is required',
+      'string.trim': 'Email cannot contain leading or trailing whitespace',
+    }),
+  }),
+};
