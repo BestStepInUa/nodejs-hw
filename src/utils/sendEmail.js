@@ -2,7 +2,10 @@ import nodemailer from 'nodemailer';
 
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
-  port: process.env.SMTP_PORT,
+  port:
+    process.env.NODE_ENV === 'development'
+      ? process.env.SMTP_PORT_DEVELOPMENT
+      : process.env.SMTP_PORT_PRODUCTION,
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASSWORD,

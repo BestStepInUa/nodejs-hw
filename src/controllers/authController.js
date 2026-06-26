@@ -99,7 +99,8 @@ export const requestResetEmail = async (req, res) => {
       subject: 'Reset your password',
       html: `<p>Click <a href="${resetToken}">here</a> to reset your password!</p>`,
     });
-  } catch {
+  } catch (error) {
+    console.error('Error sending reset email:', error);
     throw createHttpError(
       500,
       'Failed to send the email, please try again later.',
