@@ -15,6 +15,7 @@ import { logger } from './middleware/logger.js';
 
 import authRouter from './routes/authRoutes.js';
 import notesRouter from './routes/notesRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 
 import { notFoundHandler } from './middleware/notFoundHandler.js';
 import { errorHandler } from './middleware/errorHandler.js';
@@ -31,6 +32,7 @@ app.use(express.json());
 
 app.use(authRouter);
 app.use(notesRouter);
+app.use(userRoutes);
 
 app.use(notFoundHandler);
 app.use(errors());

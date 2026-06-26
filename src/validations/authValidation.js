@@ -41,3 +41,15 @@ export const requestResetEmailSchema = {
     }),
   }),
 };
+
+export const resetPasswordSchema = {
+  [Segments.BODY]: Joi.object({
+    password: Joi.string().min(8).required().messages({
+      'string.min': 'Password must be at least 8 characters long',
+      'any.required': 'Password is required',
+    }),
+    token: Joi.string().required().messages({
+      'any.required': 'Token is required',
+    }),
+  }),
+};
